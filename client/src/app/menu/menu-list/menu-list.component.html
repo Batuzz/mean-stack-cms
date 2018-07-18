@@ -1,0 +1,29 @@
+<div class="list-container">
+  <a routerLink="/menu/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+  <table>
+    <tr>
+      <th>
+        <input type="search" [(ngModel)]="menuFilter" [formControl]="menuControl" placeholder="Name">
+      </th>
+      <th>Sequence</th>
+      <input type="search" [(ngModel)]="menuURLFilter" [formControl]="menuControl" placeholder="URL">
+      <th>Translations</th>
+      <th>Delete</th>
+    </tr>
+    <ng-container *ngFor="let menu of menus | menuFilterPipe : menuFilter | filterMenuByURL : menuURLFilter">
+      <tr>
+        <td><a routerLink="/menu/detail/{{ menu._id }}">{{ menu.name }}</a></td>
+        <td class="centre">{{ menu.sequence }}</td>
+        <td>{{ menu.url }}</td>
+        <td>Expand</td>
+        <td>
+          <img (click)="removeMenu(menu._id)" src="../../../assets/img/delete.png" alt="&#9932;" />
+        </td>
+      </tr>
+      <tr class="expandable-table" *ngFor="let translation of menu.translations">
+        <td>{{ translation.language.name }}</td>
+        <td colspan="3">{{ translation.text }}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>

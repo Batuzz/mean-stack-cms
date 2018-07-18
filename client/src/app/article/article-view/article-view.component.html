@@ -1,0 +1,12 @@
+<div *ngIf="article" class="article-wrapper">
+  <h1 [innerHTML]="article.translations | trans"></h1>
+  <img src="{{'../../../assets/img/line-right.png'}}" class="line"><br>
+  <div *ngFor="let section of article.sections; let i = index" class="article">
+    <div class="container">
+      <img *ngIf="section.image" src="{{ section.image.url }}" class="thumb">
+      <div [innerHTML]="section.translations | trans" class="article-text"></div>
+    </div>
+    <hr>
+  </div>
+  <img src="{{'../../../assets/img/line-left.png'}}" class="line">
+</div>

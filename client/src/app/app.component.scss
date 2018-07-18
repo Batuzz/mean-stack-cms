@@ -1,0 +1,12 @@
+@import '../assets/variables';
+::-webkit-scrollbar{
+  width: 20px;
+}
+::-webkit-scrollbar-track{
+  background: $thirdColor;
+}
+::-webkit-scrollbar-thumb{
+  background: $thirdColor;
+}
+
+//linear-gradient(to bottom, $fourthColor, $secondaryColor)

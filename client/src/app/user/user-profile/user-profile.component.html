@@ -1,0 +1,59 @@
+<form [formGroup]="userForm" (ngSubmit)="updateUser(userForm.value)">
+  <div class="form-group">
+    <h1>User profile</h1>
+
+    <label>Name<br>
+      <input type="text"  formControlName="username" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="userForm.controls.username.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="userForm.controls.username.errors.required">
+        &#9932; Name is required.
+      </div>
+      <div *ngIf="userForm.controls.username.errors.minlength">
+        &#9932; User name must contain at least 2 characters
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; User name is valid
+      </div>
+    </ng-template>
+
+
+    <label>Email<br />
+      <input type="email" formControlName="email" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="userForm.controls.email.invalid; else emailok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="userForm.controls.email.errors.required">
+        &#9932; Email is required.
+      </div>
+      <div *ngIf="userForm.controls.email.errors.email">
+        &#9932; It must be an email
+      </div>
+    </div>
+    <ng-template #emailok>
+      <div class="alert alert-success left-border-green">
+        &#10004; User email is valid
+      </div>
+    </ng-template>
+    <br />
+
+
+    <h3>Upload your image</h3>
+    <p-fileUpload mode="basic" auto="auto" name="image" url="{{ appSettings.getApiEndpoint() + 'upload' }} " accept="image/*" (onUpload)="onBasicUpload($event)"></p-fileUpload>
+
+    <img class="img-responsive" *ngIf="imageURL" src="{{ imageURL }}" >
+    <br />
+    <br />
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!userForm.valid">
+  </div>
+</form>
+
+

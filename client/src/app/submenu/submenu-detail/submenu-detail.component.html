@@ -1,0 +1,84 @@
+<form [formGroup]="submenuForm" (ngSubmit)="updateSubmenu(submenuForm.value)">
+  <div class="form-group">
+    <h1>Submenu detail</h1>
+
+    <label>Name<br>
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="submenuForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="submenuForm.controls.name.errors.required">
+        &#9932; Menu name is required.
+      </div>
+      <div *ngIf="submenuForm.controls.name.errors.minlength">
+        &#9932; Menu name must contain at least 2 characters
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004;Menu name is valid
+      </div>
+    </ng-template>
+
+
+    <label>Translations<br>
+      <p-pickList [source]="translations" [target]="selectedTranslations" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="name"
+                  dragdrop="true" dragdropScope="translations" sourceFilterPlaceholder="Search..." targetFilterPlaceholder="Search..." [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+        <ng-template let-translation pTemplate="item">
+          <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:left;margin:15px 5px 0 0">
+              {{translation.name}} <br />
+              {{translation.language.name}} <br />
+              {{translation.text}}</div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </label>
+    <br />
+
+
+    <label>Sequence<br>
+      <input type="number" formControlName="sequence" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="submenuForm.controls.sequence.invalid; else sequenceok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="submenuForm.controls.sequence.errors.required">
+        &#9932; Menu sequence is required.
+      </div>
+      <div *ngIf="submenuForm.controls.sequence.errors.min">
+        &#9932; Minimum number is 1
+      </div>
+    </div>
+    <ng-template #sequenceok>
+      <div class="alert alert-success left-border-green">
+        &#10004;Menu sequence is valid
+      </div>
+    </ng-template>
+    <br />
+
+
+    <label>URL<br>
+      <input type="text" formControlName="url" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="submenuForm.controls.url.invalid; else urlok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="submenuForm.controls.url.errors.required">
+        &#9932; Menu URL is required.
+      </div>
+    </div>
+    <ng-template #urlok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Menu URL is valid
+      </div>
+    </ng-template>
+    <br>
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!submenuForm.valid">
+  </div>
+</form>

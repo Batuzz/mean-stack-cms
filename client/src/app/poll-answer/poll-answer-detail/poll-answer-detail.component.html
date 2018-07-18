@@ -1,0 +1,53 @@
+<form [formGroup]="pollAnswerForm" (ngSubmit)="updatePollAnswer(pollAnswerForm.value)">
+  <div class="form-group">
+    <h1>Poll Answer Option creation form</h1>
+
+    <label>Name<br>
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="pollAnswerForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="pollAnswerForm.controls.name.errors.required">
+        &#9932; Poll answer option name is required.
+      </div>
+      <div *ngIf="pollAnswerForm.controls.name.errors.minlength">
+        &#9932; Poll answer option name must contain at least 3 characters
+      </div>
+
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Poll answer option name is valid
+      </div>
+    </ng-template>
+
+    <label>Translations
+      <p-pickList [source]="translations" [target]="selectedTranslations" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="name"
+                  dragdrop="true" dragdropScope="translations" sourceFilterPlaceholder="Search..." targetFilterPlaceholder="Search..." [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+        <ng-template let-translation pTemplate="item">
+          <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:left;margin:15px 5px 0 0">
+              {{translation.name}} <br />
+              {{translation.language.name}} <br />
+              {{translation.text}}</div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </label>
+    <br />
+
+    <h3>Color</h3>
+    <p-colorPicker [(ngModel)]="color" [formControl]="colorControl"></p-colorPicker>
+    <input type="text" [(ngModel)]="color" [formControl]="colorControl2" style="width: 100px; margin: 10px;"  />
+
+
+    <h3>Hover color</h3>
+    <p-colorPicker [(ngModel)]="hoverColor" [formControl]="hoverColorControl"></p-colorPicker>
+    <input type="text" [(ngModel)]="hoverColor" [formControl]="hoverColorControl2" style="width: 100px; margin: 10px;" />
+
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!pollAnswerForm.valid">
+  </div>
+</form>

@@ -1,0 +1,12 @@
+{
+  "database": {
+    "url": "mongodb-url",
+    "connectionErrorMessage": "Unable to connect to database",
+    "connectionEstablishedMessage": "[D] Database connected successfully"
+  },
+  "server": {
+    "port": 8080,
+    "message": "[S] Listening on port 8080"
+  },
+  "jwtSecret": "0a6b944d-d2fb-46fc-a85e-0295c986cd9f"
+}

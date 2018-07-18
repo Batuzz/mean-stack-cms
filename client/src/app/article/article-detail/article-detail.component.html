@@ -1,0 +1,73 @@
+<form [formGroup]="articleForm" (ngSubmit)="updateArticle(articleForm.value)">
+  <div class="form-group">
+    <h1>Article creation form</h1>
+
+    <label>Name
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="articleForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="articleForm.controls.name.errors.required">
+        &#9932; Section name is required.
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Article name is valid
+      </div>
+    </ng-template>
+
+    <p-pickList [source]="translations" [target]="selectedTranslations" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="name"
+                dragdrop="true" dragdropScope="translations" sourceFilterPlaceholder="Search..." targetFilterPlaceholder="Search..." [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+      <ng-template let-translation pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <div style="font-size:14px;float:left;margin:15px 5px 0 0">
+            {{translation.name}} <br />
+            {{translation.language.name}} <br />
+            {{translation.text}}</div>
+        </div>
+      </ng-template>
+    </p-pickList>
+    <br />
+
+    <div *ngIf="!selectedTranslations || !selectedTranslations.length; else translationsOK"
+         class="alert alert-danger left-border-red">
+      &#9932; Translations are required.
+    </div>
+    <ng-template #translationsOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; Translations are valid
+      </div>
+    </ng-template>
+
+    <p-pickList [source]="sections" [target]="selectedSections" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="name"
+                dragdrop="true" dragdropScope="translations" sourceFilterPlaceholder="Search..." targetFilterPlaceholder="Search..." [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+      <ng-template let-section pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <img src="{{ (section.image ? section.image.url : '../../../assets/img/no_image.png') }}" style="display:inline-block;margin:2px 0 2px 2px" width="48">
+          <br><div style="font-size:14px;float:left;margin:15px 5px 0 0">
+          {{ section.name }} <br />
+          {{ section.titles | trans }} <br />
+          {{ section.descriptions | trans }}</div>
+        </div>
+      </ng-template>
+    </p-pickList>
+    <br />
+
+    <div *ngIf="!selectedSections || !selectedSections.length; else translationsOK"
+         class="alert alert-danger left-border-red">
+      &#9932; Sections are required.
+    </div>
+    <ng-template #translationsOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; Sections are valid
+      </div>
+    </ng-template>
+
+
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!articleForm.valid">
+  </div>
+</form>

@@ -1,0 +1,24 @@
+<a routerLink="/image/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+<p-dataList [value]="images" [paginator]="true" [rows]="20">
+  <p-header>
+    List of Images
+  </p-header>
+  <ng-template let-image pTemplate="item">
+    <div class="ui-g ui-fluid image-item">
+      <div class="ui-g-12 ui-md-3" style="text-align:center">
+        <a routerLink="/image/detail/{{ image._id }}">
+          <img src="{{ image.url }}" class="list-image">
+        </a>
+      </div>
+      <div class="ui-g-12 ui-md-9 image-details">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-2">Description: </div>
+          <div class="ui-g-10 ui-sm-2">{{ image.descriptions | trans }} &nbsp; &nbsp; <i class="far fa-trash-alt" style="font-size: 50px; position: absolute;"></i></div>
+
+          <div class="ui-g-2 ui-sm-3">Title: </div>
+          <div class="ui-g-10 ui-sm-3">{{ image.titles | trans }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataList>

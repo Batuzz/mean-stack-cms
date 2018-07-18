@@ -1,0 +1,41 @@
+<div *ngIf="!name">
+  <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <div class="form-container">
+      <div class="row columns">
+
+        <h1>Log in</h1>
+
+        <label>Email<br>
+          <input type="text" formControlName="email">
+        </label>
+
+        <div *ngIf="loginForm.controls.email.invalid; else emailOK"
+             class="alert alert-danger">
+          <div *ngIf="loginForm.controls.email.errors.required" class="alertdiv">
+            &#9932; Email is required.
+          </div>
+          <div *ngIf="loginForm.controls.email.errors.email" class="alertdiv">
+            &#9932; It must be an email.
+          </div>
+        </div>
+
+        <ng-template #emailOK class="alertok">
+          <div class="alert alert-success alertok">
+            &#10004; Email is ok
+          </div>
+        </ng-template><br><br>
+
+
+
+        <label>Password<br>
+          <input type="password" formControlName="password">
+        </label>
+        <br>
+        <br />
+
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <input type="submit" class="button expanded" value="Submit Form" [disabled]="!loginForm.valid || loading"><br>
+      </div>
+    </div>
+  </form>
+</div>

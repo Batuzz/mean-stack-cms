@@ -1,0 +1,99 @@
+@import '../../../assets/variables';
+
+.poll {
+  width: 70%;
+  margin: 30px auto;
+
+  h1 {
+    color: $fourthColor;
+  }
+
+  .questions-wrapper {
+    margin: auto;
+    width: 70%;
+  }
+
+  .poll-question {
+    width: 100%;
+    clear: both;
+    margin: 0 0 100px;
+
+    .question {
+      @media screen and (min-width: 1200px) {
+        font-size: 30px;
+      }
+      @media screen and (max-width: 1200px) {
+        font-size: 20px;
+      }
+      display: inline-block;
+      text-align: center;
+      clear: both;
+      font-weight: bolder;
+
+      position:relative;
+      margin:10px;
+      background: linear-gradient($fourthColor, $fourthColor) bottom no-repeat;
+      background-size: 86% 3px;
+      border-bottom: none;
+    }
+  }
+
+  .poll-answers {
+    margin: 10px auto;
+  }
+
+  .answer {
+
+
+    margin: 3%;
+    display: block;
+    float: left;
+    width: 44%;
+
+
+    label {
+      display: block;
+      float: left;
+    }
+
+    .ui-radiobutton-label {
+      cursor: pointer;
+      display: block;
+      float: left;
+      padding: 25px 10px;
+      width: 100%;
+      background-color: $fourthColor;
+      text-align: center;
+      @media screen and (min-width: 1200px) {
+        font-size: 30px;
+      }
+      @media screen and (max-width: 1200px) {
+        font-size: 18px;
+      }
+    }
+
+    .ui-label-active {
+      color: $thirdColor;
+    }
+  }
+
+  .poll-submit {
+    clear: both;
+    padding: 20px;
+    font-size: 40px;
+    background-color: $primaryColor;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    width: 86%;
+    margin: auto;
+  }
+
+  .poll-submit:hover {
+    background-color: $thirdColor;
+  }
+}
+
+.ui-radiobutton-box, .ui-radiobutton, .display-none{
+  display: none !important;
+}

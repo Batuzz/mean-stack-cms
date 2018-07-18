@@ -1,0 +1,93 @@
+<form [formGroup]="menuForm" (ngSubmit)="createMenu(menuForm.value)">
+  <div class="form-group">
+    <h1>Menu creation form</h1>
+
+    <label>Name<br>
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="menuForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="menuForm.controls.name.errors.required">
+        &#9932; Menu name is required.
+      </div>
+      <div *ngIf="menuForm.controls.name.errors.minlength">
+        &#9932; Menu name must contain at least 3 characters
+      </div>
+
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Menu name is valid
+      </div>
+    </ng-template>
+
+
+    <label>Sequence <br>
+      <input type="number" formControlName="sequence" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="menuForm.controls.sequence.invalid; else sequenceOK"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="menuForm.controls.sequence.errors.required">
+        &#9932; Sequence is required.
+      </div>
+    </div>
+    <ng-template #sequenceOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; Sequence is valid
+      </div>
+    </ng-template>
+
+    <label>url<br>
+      <input type="text" formControlName="url" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="menuForm.controls.url.invalid; else urlOK"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="menuForm.controls.url.errors.required">
+        &#9932; URL is required.
+      </div>
+    </div>
+    <ng-template #urlOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; URL is valid
+      </div>
+    </ng-template>
+
+    <label>Translations
+      <p-pickList [source]="translations" [target]="selectedTranslations" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="name"
+                  dragdrop="true" dragdropScope="translations" sourceFilterPlaceholder="Search..." targetFilterPlaceholder="Search..." [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+        <ng-template let-translation pTemplate="item">
+          <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:left;margin:15px 5px 0 0">
+              {{translation.name}} <br />
+              {{translation.language.name}} <br />
+              {{translation.text}}</div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </label>
+    <br />
+
+    <label>Submenus
+      <p-pickList [source]="submenus" [target]="selectedSubmenus" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="name"
+                  dragdrop="true" dragdropScope="submenus" sourceFilterPlaceholder="Search..." targetFilterPlaceholder="Search..." [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+        <ng-template let-submenus pTemplate="item">
+          <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:left;margin:15px 5px 0 0">
+              {{submenus.name}} <br />
+              {{submenus.sequence}} <br />
+              {{submenus.translations}}</div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </label>
+    <br />
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!menuForm.valid">
+  </div>
+</form>

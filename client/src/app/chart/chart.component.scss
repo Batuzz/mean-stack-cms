@@ -1,0 +1,34 @@
+@import '../../assets/variables';
+
+.charts {
+  .chart {
+    width: 44%;
+    height: 44%;
+    margin: 100px 3%;
+    float: left;
+  }
+
+  .question {
+    font-size: 30px;
+    display: inline-block;
+    text-align: center;
+    clear: both;
+    font-weight: bolder;
+
+    position:relative;
+    margin:10px;
+    background: linear-gradient($fourthColor, $fourthColor) bottom no-repeat;
+    background-size: 86% 3px;
+    border-bottom: none;
+  }
+
+  .answer {
+    margin-top: 20px;
+    font-size: 15px;
+  }
+
+  .your-answer {
+    font-style: italic;
+    font-weight: bolder;
+  }
+}

@@ -1,0 +1,13 @@
+image: node:9
+clone:
+  depth: full
+pipelines:
+  default:
+    - step:
+        script:
+          - cd server
+          - npm install
+          - cd ..
+          - cd client 
+          - npm install
+          - git push https://heroku:8100813a-f275-430f-8900-f17606040f1d@git.heroku.com/konkurs-2018.git HEAD

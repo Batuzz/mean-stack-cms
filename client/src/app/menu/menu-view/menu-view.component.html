@@ -1,0 +1,72 @@
+
+<div id="mainMenu">
+  <table id="menu" class="nav">
+    <td *ngIf="user" id="menuOpen" (click)="open()">Admin Menu</td>
+    <td *ngFor="let menu of menus"
+       class="navbar-dark bg-dark"
+        (click)="drop(menu.submenus.length ? menu._id : -1)">
+      <div class="dropdown" *ngIf="menu.submenus.length">
+        <p [innerHTML]="menu.translations | trans"></p>
+        <div class="submenu"  id="{{menu._id}}">
+          <div *ngFor="let submenu of menu.submenus" class="subelement">
+            <p [innerHTML]="submenu.translations | trans"
+               [routerLink]="submenu.url"></p><br>
+          </div>
+
+        </div>
+      </div>
+      <div class="dropdown" *ngIf="!menu.submenus.length" [routerLink]="menu.url">
+        <p [innerHTML]="menu.translations | trans"></p>
+      </div>
+    </td>
+
+    <td class="lang">
+      <p-dropdown *ngIf="languages && selectedLanguage"
+                  [options]="languages"
+                  [(ngModel)]="selectedLanguage"
+                  [formControl]="formControl"
+                  [style]="{'width':'70%', 'background-color':'transparent', 'border':'none'}"
+                  (onChange)="setLanguage()">
+        <ng-template let-item pTemplate="selectedItem">
+          <img src="{{ item.url }}" style="width:16px;vertical-align:middle" />
+          <span style="vertical-align:middle">{{ item.label }}</span>
+        </ng-template>
+        <ng-template let-item pTemplate="item">
+          <div class="ui-helper-clearfix" style="height: 25px;">
+            <div style="font-size:14px;float:right;margin-top:4px">{{ item.label }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </td>
+  </table>
+</div>
+
+
+<!--img *ngIf="user" id="menuOpen" (click)="open()" src="../../../assets/img/menuicon.png"-->
+<table *ngIf="user" class="nav" id="menuTable">
+    <tr *ngIf="user && ts.translations" id="user" class="navelement">
+      <div routerLink="/user/profile">
+        <img id="profilove" src="{{ (user.imageURL ? user.imageURL : '../../../assets/img/default-avatar.png') }}" />
+      </div>
+      <b style="line-height: 5px;"><br/> <p [innerHTML]="'hello' | trans"></p> {{ user.username }}! </b>
+    </tr>
+    <tr class="navbar navbar-dark bg-dark navelement" (click)="logout()">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-sign-out-alt"></i> Logout</tr> <!--TODO: wylogowanie ładne w innym miejscu-->
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/homepage">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-home"></i> Homepage</tr>
+
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/image/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="far fa-images"></i> Images</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/language/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-american-sign-language-interpreting"></i> Languages</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/translation/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-language"></i> Translations</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/menu/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-bars"></i> Menus</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/submenu/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="far fa-caret-square-down"></i> Submenus</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/poll/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="far fa-thumbs-up"></i> Polls</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/poll/question/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="far fa-question-circle"></i> Poll Questions</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/poll/answer/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-chart-pie"></i> Poll Answers</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/section/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-puzzle-piece"></i> Sections</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" routerLink="/article/list">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-align-left"></i> Articles</tr>
+    <tr class="navbar navbar-dark bg-dark navelement" (click)="close()">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fas fa-times"></i> Close
+
+    </tr>
+</table>
+
+
+

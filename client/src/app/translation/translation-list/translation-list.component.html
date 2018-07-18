@@ -1,0 +1,25 @@
+<div class="list-container" *ngIf="translations">
+  <a routerLink="/translation/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+  <table>
+    <tr>
+      <th>
+        <input type="search" [(ngModel)]="translationFilter" [formControl]="translationControl" placeholder="Name">
+      </th>
+      <th>
+        <input type="search" [(ngModel)]="translationLanguageFilter" [formControl]="translationControl" placeholder="Language">
+      </th>
+      <th>
+        <input type="search" [(ngModel)]="translationTextFilter" [formControl]="translationControl" placeholder="Text">
+      </th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let translation of translations | filterTranslationByName : translationFilter | filterTranslationByLanguage: translationLanguageFilter | filterTranslationByText: translationTextFilter">
+      <td><a routerLink="/translation/detail/{{ translation._id }}">{{ translation.name }}</a></td>
+      <td>{{ (translation.language ? translation.language.name : 'Polski') }}</td>
+      <td>{{ translation.text }}</td>
+      <td>
+        <img (click)="removeTranslation(translation._id)" src="../../../assets/img/delete.png" alt="&#9932;" />
+      </td>
+    </tr>
+  </table>
+</div>

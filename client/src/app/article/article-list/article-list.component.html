@@ -1,0 +1,11 @@
+<div class="list-container">
+  <a routerLink="/article/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+  <table>
+    <tr>
+      <th>Name</th>
+    </tr>
+    <tr *ngFor="let article of articles">
+      <td><a routerLink="/article/detail/{{ article._id }}">{{ article.name }}</a></td>
+    </tr>
+  </table>
+</div>

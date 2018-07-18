@@ -1,0 +1,19 @@
+<div class="list-container">
+  <a routerLink="/language/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+  <table>
+    <tr>
+      <th>
+        <input type="search" [(ngModel)]="languageFilter" [formControl]="languageControl" placeholder="Name">
+      </th>
+      <th>ISO Code</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let language of languages | languagesFilterPipe : languageFilter">
+      <td><a routerLink="/language/detail/{{ language._id }}">{{ language.name }}</a></td>
+      <td>{{ language.iso }}</td>
+      <td>
+        <img (click)="removeLanguage(language._id)" src="../../../assets/img/delete.png" alt="&#9932;" />
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,48 @@
+<form [formGroup]="languageForm" (ngSubmit)="createLanguage(languageForm.value)">
+  <div class="form-group">
+    <h1>Language creation form</h1><br>
+
+    <label>Name<br>
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="languageForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="languageForm.controls.name.errors.required">
+        &#9932; Language name is required.
+      </div>
+      <div *ngIf="languageForm.controls.name.errors.minlength">
+        &#9932; Language name must contain at least 3 characters
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Language name is valid
+      </div>
+    </ng-template>
+
+
+    <label>ISO<br>
+      <input type="text" formControlName="iso" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="languageForm.controls.iso.invalid; else isoOK"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="languageForm.controls.iso.errors.required">
+        &#9932; ISO code is required.
+      </div>
+      <div *ngIf="languageForm.controls.iso.errors.minlength">
+        &#9932; Language name must contain at least 2 characters
+      </div>
+    </div>
+    <ng-template #isoOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; ISO code is valid
+      </div>
+    </ng-template>
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!languageForm.valid">
+  </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="list-container">
+  <a routerLink="/submenu/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+  <table>
+    <tr>
+      <th>
+        <input type="search" [(ngModel)]="submenuFilter" [formControl]="submenuControl" placeholder="Name">
+      </th>
+      <th>
+        Sequence
+      </th>
+      <th>
+        <input type="search" [(ngModel)]="submenuURLFilter" [formControl]="submenuURLControl" placeholder="URL">
+      </th>
+      <th>
+        Translations
+      </th>
+      <th>Delete</th>
+    </tr>
+    <ng-container *ngFor="let submenu of submenus | submenuFilterPipe : submenuFilter | filterSubmenuByURL : submenuURLFilter ">
+      <tr>
+        <td><a routerLink="/submenu/detail/{{ submenu._id }}">{{ submenu.name }}</a></td>
+        <td class="centre">{{ submenu.sequence }}</td>
+        <td>{{ submenu.url }}</td>
+        <td>Expand</td>
+        <td>
+          <img (click)="removeSubmenu(submenu._id)" src="../../../assets/img/delete.png" alt="&#9932;" />
+        </td>
+      </tr>
+      <tr class="expandable-table" *ngFor="let translation of submenu.translations">
+        <td>{{ translation.language.name }}</td>
+        <td colspan="4">{{ translation.text }}</td>
+      </tr>
+
+    </ng-container>
+  </table>
+</div>

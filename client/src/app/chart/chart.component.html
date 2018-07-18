@@ -1,0 +1,10 @@
+<div *ngIf="canRender && ts.translations" class="charts">
+  <div *ngFor="let dat of chartData" class="chart">
+    <span class="question" [innerHTML]="dat['translations'] | trans"></span><br />
+    <p class="answer" [innerHTML]="'your_answer' | trans"></p>
+    <span [innerHTML]="dat['selectedAnswer'] | trans" class="your-answer"></span>
+
+    <p-chart  type="doughnut" [data]="dat" [options]="options" style="color: white !important;">
+    </p-chart>
+  </div>
+</div>

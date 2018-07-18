@@ -1,0 +1,86 @@
+@import '../../../assets/variables';
+
+.article-wrapper {
+  @media screen and (min-width: 1000px){
+    width: 70%;
+    margin: auto;
+  }
+  @media screen and (max-width: 1000px){
+    margin-left: 0px;
+    width: 90%;
+  }
+
+
+  h1 {
+    padding-top: 1em;
+    color: $fourthColor;
+  }
+  .line {
+    margin-top: -25px;
+    width: 100%;
+  }
+
+  .article {
+    @media screen and (min-width: 1000px){
+      display: inline-block;
+      clear: both;
+      margin: 25px;
+    }
+    @media screen and (max-width: 1000px){
+      display: inline-block;
+      clear: both;
+    }
+
+    .container {
+      @media (min-width: 1200px) {
+        width: 70%;
+      }
+      @media (min-width: 992px) {
+      width: 80%;
+      }
+      @media (min-width: 768px) {
+        width: 100%;
+      }
+      margin: 25px auto 10px;
+    }
+    .thumb {
+      width: 350px;
+      height: 250px;
+      position: relative;
+      margin: 0 20px;
+    }
+
+    .article-text {
+      position: relative;
+      margin: 0 20px;
+      text-indent: 1.25em;
+      font-size: 20px;
+    }
+
+    hr{
+      width: 100%;
+      margin-top:50px;
+      border: 1px solid $secondaryColor;
+      border-radius: 10px;
+    }
+
+  }
+
+  .article:last-of-type {
+    hr{
+      display: none;
+    }
+  }
+
+  .article:nth-child(odd){
+    .thumb {
+      float: left;
+    }
+  }
+
+  .article:nth-child(even) {
+    .thumb {
+      float: right;
+    }
+  }
+}

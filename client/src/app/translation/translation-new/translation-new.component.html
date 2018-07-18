@@ -1,0 +1,63 @@
+<form [formGroup]="translationForm" (ngSubmit)="createTranslation(translationForm.value)">
+  <div class="form-group">
+    <h1>Translation creation form</h1>
+
+    <label>Name
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="translationForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="translationForm.controls.name.errors.required">
+        &#9932; Translation name is required.
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Translation name is valid
+      </div>
+    </ng-template>
+
+
+    <label>Language
+      <select *ngIf="languages" type="text" formControlName="language" class="form-control">
+        <option *ngFor="let language of languages"
+                [ngValue]="language._id">{{ language.name }}</option>
+      </select>
+    </label>
+    <br />
+
+    <div *ngIf="translationForm.controls.language.invalid; else languageOK"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="translationForm.controls.language.errors.required">
+        &#9932; Language is required.
+      </div>
+    </div>
+    <ng-template #languageOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; Language is valid
+      </div>
+    </ng-template>
+
+
+    <h3 class="first">Text</h3>
+    <p-editor [(ngModel)]="text" [formControl]="control" [style]="{'height':'320px'}"></p-editor>
+    <p>Value: {{text||'empty'}}</p>
+
+    <div *ngIf="!text || !text.length; else textOK"
+         class="alert alert-danger left-border-red">
+      <div>
+        &#9932; Translation text is required.
+      </div>
+    </div>
+    <ng-template #textOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; Translation text is valid
+      </div>
+    </ng-template>
+
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!translationForm.valid">
+  </div>
+</form>

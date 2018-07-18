@@ -1,0 +1,79 @@
+@import "variables";
+.list-container{
+  width: 80%;
+  padding-top: 5px;
+  margin-top: 5vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 20vh;
+  margin-left: auto;
+  margin-right: auto;
+  .btn{
+    background-color: $fifthColor;
+    border: 1px solid $fourthColor;
+  }
+}
+
+.ui-datalist, .btn{
+  margin-top: 5vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ui-datalist{
+  width: 80%;
+}
+
+table{
+  width: 80%;
+  padding-top: 5px;
+  margin-top: 5vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 20vh;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(to right, $secondaryColor,$thirdColor  80%);
+  font-size: 20px;
+  box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.6);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  td{
+    border-radius: 0;
+    border-bottom: 1px solid white;
+    padding: 5px;
+  }
+  tr:nth-child(even){
+    //background-color: #b9b9b9;
+  }
+  th{
+    //background-color: $thirdColor;
+    border-bottom: 1px solid white;
+    border-radius: 0;
+    min-height: 20px;
+    padding: 5px;
+  }
+  tr{
+    border-radius: 0;
+    //background-color: white;
+  }
+  a:link{
+    color: #fff;
+  }
+  a:visited{
+    color: #b7c2cb;
+  }
+}
+
+input[type=search] {
+  background-color: transparent;
+  border: none;
+  color: #FFF;
+  width: 100%;
+}
+
+:-moz-placeholder { // TODO: nie działa
+  color: red;
+}
+img{
+  width: 30px;
+}

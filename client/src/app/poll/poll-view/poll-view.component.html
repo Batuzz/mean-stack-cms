@@ -1,0 +1,21 @@
+<div *ngIf="poll && answers && ts.translations" class="poll">
+  <h1 [innerHTML]="poll.translations | trans"></h1>
+  <div class="questions-wrapper">
+    <div *ngFor="let question of poll.questions" class="poll-question">
+      <div class="question" [innerHTML]="question.translations | trans"></div>
+      <div *ngFor="let answer of answers">
+        <div class="answer" *ngIf="answer.questionID == question._id">
+          <p-radioButton
+            name="{{ answer.questionID }}"
+            value="{{ answer._id }}"
+            label="{{ answer.label | trans }}"
+            [(ngModel)]="selectedAnswers[answer.questionID]"
+            styleClass="display-none">
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="poll-submit" (click)="sendPoll()" [innerHTML]="'send' | trans"></div>
+  </div>
+  <br />
+</div>

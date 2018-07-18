@@ -1,0 +1,71 @@
+<form [formGroup]="translationForm" (ngSubmit)="updateTranslation(translationForm.value)">
+  <div class="form-group">
+    <h1>Translation detail</h1>
+
+    <label>Name<br>
+      <input type="text"  formControlName="name" class="form-control">
+    </label>
+    <br />
+
+    <div *ngIf="translationForm.controls.name.invalid; else nameok"
+         class="alert alert-danger left-border-red">
+      <div *ngIf="translationForm.controls.name.errors.required">
+        &#9932; Translation name is required.
+      </div>
+      <div *ngIf="translationForm.controls.name.errors.minlength">
+        &#9932; Translation name must contain at least 2 characters
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Translation name is valid
+      </div>
+    </ng-template>
+
+
+    <h3>Language</h3>
+    <p-dropdown *ngIf="languages && selectedLanguage" [options]="languages" [(ngModel)]="selectedLanguage" [formControl]="formControl" [style]="{'width':'150px'}" filter="true">
+      <ng-template let-item pTemplate="selectedItem">
+        <span style="vertical-align:middle">{{ item.label }}</span>
+      </ng-template>
+      <ng-template let-image pTemplate="item">
+        <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+          <div style="font-size:14px;float:right;margin-top:4px">{{ image.label }}</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <br />
+
+    <div *ngIf="!selectedLanguage; else nameok"
+         class="alert alert-danger left-border-red">
+      <div>
+        &#9932; Translation language is required.
+      </div>
+    </div>
+    <ng-template #nameok>
+      <div class="alert alert-success left-border-green">
+        &#10004; Translation language is valid
+      </div>
+    </ng-template>
+
+
+    <h3 class="first">Text</h3>
+    <p-editor [(ngModel)]="text" [formControl]="control" [style]="{'height':'320px'}"></p-editor>
+    <!--<p>Value: {{text||'empty'}}</p>-->
+
+    <div *ngIf="!text || !text.length; else textOK"
+         class="alert alert-danger left-border-red">
+      <div>
+        &#9932; Translation text is required.
+      </div>
+    </div>
+    <ng-template #textOK>
+      <div class="alert alert-success left-border-green">
+        &#10004; Translation text is valid
+      </div>
+    </ng-template>
+
+
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!translationForm.valid">
+  </div>
+</form>

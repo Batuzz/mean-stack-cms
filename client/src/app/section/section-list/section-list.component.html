@@ -1,0 +1,27 @@
+<a routerLink="/section/new" class="btn btn-primary btn-lg btn-success">Add new</a>
+<p-dataList *ngIf="sections" [value]="sections" [paginator]="true" [rows]="20">
+  <p-header>
+    List of sections
+  </p-header>
+  <ng-template let-section pTemplate="item">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-3" style="text-align:center">
+        <a routerLink="/section/detail/{{ section._id }}">
+          <img src="{{ (section.image ? section.image.url : '../../../assets/img/no_image.png') }}" class="list-image">
+        </a>
+      </div>
+      <div class="ui-g-12 ui-md-9 section-details">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-2">Name: </div>
+          <div class="ui-g-10 ui-sm-2">{{ section.name }}</div>
+
+          <div class="ui-g-2 ui-sm-2">Translations: </div>
+          <div class="ui-g-10 ui-sm-2">{{ section.translations | trans }}</div>
+
+          <div class="ui-g-2 ui-sm-3">Image title: </div>
+          <div class="ui-g-10 ui-sm-3">{{ (section.image ? (section.image.titles | trans) : 'none') }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataList>
